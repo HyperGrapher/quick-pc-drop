@@ -17,6 +17,7 @@ self.addEventListener("message", async (event) => {
           },
           // Ensure we don't use any cached responses
           cache: 'no-store',
+          referrerPolicy: "unsafe-url" 
         });
   
         if (!response.ok) {
