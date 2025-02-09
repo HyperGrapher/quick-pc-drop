@@ -1,16 +1,20 @@
-// vite.config.js
 import { VitePWA } from 'vite-plugin-pwa';
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
     tailwindcss(),
+    react(),
     VitePWA({
+      // Use a custom service worker (injectManifest strategy)
       registerType: 'prompt',
-      injectRegister: false,
+      injectRegister: 'script', // or 'inline' or 'script-defer' as you prefer
+      strategies: 'injectManifest',
+      srcDir: 'src',      // Place your custom SW in the public folder
+      filename: 'sw-custom.js',    // This file will be used as the service worker
 
       pwaAssets: {
         disabled: false,
@@ -28,25 +32,13 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
-        runtimeCaching: [
-          {
-            // This regular expression matches any URL starting with "http://192.168."
-            // followed by one or more digits and a dot, ending with a port number.
-            urlPattern: /^http:\/\/192\.168\.\d+\.\d+:\d+$/,
-            handler: 'NetworkOnly', // Always use the network (do not cache)
-            options: {
-              cacheName: 'local-network-uploads',
-            },
-          },
-        ],
       },
 
       devOptions: {
-        enabled: false,
+        enabled: true,
         navigateFallback: 'index.html',
         suppressWarnings: true,
         type: 'module',
       },
-    }),
-  ],
-});
+    })],
+})

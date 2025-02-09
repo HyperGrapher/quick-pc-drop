@@ -3,7 +3,6 @@ import appLogo from '/favicon.svg'
 import PWABadge from './PWABadge.jsx'
 import './App.css'
 import FileUpload from './FileUpload.js'
-// import FileUploadM from './FileUploadM.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
