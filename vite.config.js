@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     VitePWA({
       // Use a custom service worker (injectManifest strategy)
-      registerType: 'prompt',
+      registerType: 'autoUpdate',
       injectRegister: 'script', // or 'inline' or 'script-defer' as you prefer
       strategies: 'injectManifest',
       srcDir: 'src',      // Place your custom SW in the public folder
