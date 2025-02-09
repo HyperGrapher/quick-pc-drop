@@ -1,3 +1,12 @@
+/* eslint-env serviceworker */
+
+import { precacheAndRoute } from 'workbox-precaching';
+
+// Precache assets (the manifest will be injected by vite-plugin-pwa)
+precacheAndRoute(self.__WB_MANIFEST || []);
+
+
+
 self.addEventListener("message", async (event) => {
     if (event.data && event.data.type === "UPLOAD_FILE") {
       const { url, fileName, contentType, data } = event.data;
